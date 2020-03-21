@@ -1,30 +1,28 @@
 #include<iostream>
 
-
-/*
-
-    return_type function_name(parameter1 , parameter2 , parameter3 , ...)
-    {
-        // code of function's job
-    }
-
-    //return_type can be any type Or nothing!
-    //function_name follow variable's rule.
-    //parameter_list can be anything that you send it to function.
-*/
-
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ first function
-void printHello(void)
+double powerMath(double x,int n)
 {
-    std::cout<<"Hello"<<std::endl;
+    double result{1};
+    if(n<0)
+    {
+        x=(1/x);
+        n*=-1;
+    }
+    else if(n==0)
+    {
+        return 1.0;
+    }
+    for(int i=0;i<n;i++)
+        result*=x;
+    return result;
 }
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 
 int main()
 {
-    //first example
-    printHello();
+    std::cout<<powerMath(2,2)<<std::endl;
+    std::cout<<powerMath(2,-3)<<std::endl;
+    std::cout<<powerMath(-2,2)<<std::endl;
+    std::cout<<powerMath(-2,3)<<std::endl;
+    std::cout<<powerMath(-1000,0)<<std::endl;
     return 0;
 }
