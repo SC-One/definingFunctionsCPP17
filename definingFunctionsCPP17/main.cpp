@@ -1,18 +1,20 @@
 #include<iostream>
-void changeValueOutSide(double *valueToChange); // prototype function
+double averageNumbers(const double *array,const size_t lengthNumbers);
 int main()
 {
-    double n{9.0};
-    changeValueOutSide(&n);     // pass paramter by pointer
-                                // it send copy of &n
-                                // and we work on that address
-                                // thus we change original value
-    std::cout<<"result of function: "<<n<<std::endl;
+    double marks[] {1,2,3,4,5,6,7,8,9,10};
+    size_t size=sizeof (marks)/sizeof (marks[0]);
+    std::cout<<averageNumbers(marks,size)<<std::endl;
     return 0;
 }
 
-void changeValueOutSide(double *value) //function header
+double averageNumbers(const double *array,const size_t lengthNumbers)
 {
-    *value+=100;
-    return;
+    double sum{};
+    for (size_t i=0;i<lengthNumbers;i++)
+    {
+        sum+=(*array++);
+    }
+    sum/=lengthNumbers;
+    return sum;
 }
