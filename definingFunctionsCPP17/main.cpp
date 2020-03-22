@@ -1,23 +1,18 @@
 #include<iostream>
-double changeValueOutSide(double valueToChange);
+void changeValueOutSide(double *valueToChange); // prototype function
 int main()
 {
-    double n{1.0},result{};
-    std::cout<<"n before exec function: "<<n<<std::endl;
-    changeValueOutSide(n);
-    std::cout<<"n after exec function: "<<n<<std::endl; // when by value function exec
-                                                        // that dont change values. (copy passed to function)
-
-
-    result=changeValueOutSide(n);
-    std::cout<<"result of function: "<<result<<std::endl;
-
-
+    double n{9.0};
+    changeValueOutSide(&n);     // pass paramter by pointer
+                                // it send copy of &n
+                                // and we work on that address
+                                // thus we change original value
+    std::cout<<"result of function: "<<n<<std::endl;
     return 0;
 }
 
-double changeValueOutSide(double value)
+void changeValueOutSide(double *value) //function header
 {
-    value+=100;
-    return value;
+    *value+=100;
+    return;
 }
