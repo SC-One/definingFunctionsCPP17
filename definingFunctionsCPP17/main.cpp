@@ -1,35 +1,23 @@
 #include<iostream>
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Prototype functions @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-double powerMath(double value,int exponent); // function prototype
-// does not matter what's these names :: Value and Exponent
-
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Main function      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+double changeValueOutSide(double valueToChange);
 int main()
 {
-    std::cout<<powerMath(2,2)<<std::endl;
-    std::cout<<powerMath(2,-3)<<std::endl;
-    std::cout<<powerMath(-2,2)<<std::endl;
-    std::cout<<powerMath(-2,3)<<std::endl;
-    std::cout<<powerMath(-1000,0)<<std::endl;
+    double n{1.0},result{};
+    std::cout<<"n before exec function: "<<n<<std::endl;
+    changeValueOutSide(n);
+    std::cout<<"n after exec function: "<<n<<std::endl; // when by value function exec
+                                                        // that dont change values. (copy passed to function)
+
+
+    result=changeValueOutSide(n);
+    std::cout<<"result of function: "<<result<<std::endl;
+
+
     return 0;
 }
 
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ function's Header @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-double powerMath(double x,int n)
+double changeValueOutSide(double value)
 {
-    double result{1};
-    if(n<0)
-    {
-        x=(1/x);
-        n*=-1;
-    }
-    else if(n==0)
-    {
-        return 1.0;
-    }
-    for(int i=0;i<n;i++)
-        result*=x;
-    return result;
+    value+=100;
+    return value;
 }
