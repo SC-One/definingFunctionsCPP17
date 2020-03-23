@@ -1,15 +1,32 @@
 #include<iostream>
-void changeNumber(double &value);
+void changeNumberByRefrence(double &value);
+void changeNumberByPointer(double *value);
 int main()
 {
     double value{100};
     std::cout<<"Before passing to function by refrence: "<<value<<std::endl;
-    changeNumber(value);   // just need its name , not address!
+    changeNumberByRefrence(value);
     std::cout<<"After passing to function by refrence: "<<value<<std::endl;
+
+
+    value=100;
+    std::cout<<"Before passing to function by pointer: "<<value<<std::endl;
+    changeNumberByPointer(&value);
+    std::cout<<"After passing to function by pointer: "<<value<<std::endl;
+
+
+    // no diffrence between them. just pointer notation
+    // in "By pointer" is superflous.
     return 0;
 }
-void changeNumber(double &value) // same to passing by pointer !
-{                                // but it have one advantage!
-    value+=20;                   // we dont need pointer notation and when use it in main
-    return;                      // dont need send its address! just name Of variable need.
+void changeNumberByRefrence(double &value)
+{
+    value+=20;
+    return;
+}
+
+void changeNumberByPointer(double *value)
+{
+    (*value)+=20;
+    return;
 }
