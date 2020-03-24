@@ -1,26 +1,60 @@
 #include<iostream>
-using std::cout;
-using std::endl;
-void changeIt(double& it);
-void printIt(const double& it);
-
+#include<vector>
+#include<string>
+#include<iomanip>
+void findWordsInText(std::string_view text,std::string_view seprators,std::vector<std::string> &words);
+size_t findMaxSizeWords(const std::vector<std::string> &words);
+void printListWords(const std::vector<std::string> &words,const size_t &max);
 int main()
 {
-    double doub{1379.1};
-    changeIt(doub);
-    printIt(doub);
-    int integ{1379};
-//    changeIt(integ);          //It occure an error : no matching for call of changeIt
-    printIt(integ);
+    std::string text;
+    std::cout<<"Insert text that terminated by '*': ";
+    std::getline(std::cin,text,'*');
+    std::cout<<std::endl;
+    std::vector<std::string> words;
+    const std::string separators{" ,;:.\"!?'\n"};
+    findWordsInText(text,separators,words);
+    printListWords(words,findMaxSizeWords(words));
     return 0;
 }
-
-void changeIt(double& it)
+void findWordsInText(std::string_view text,std::string_view seprators,std::vector<std::string> &words)
 {
-    it-=4;
+    size_t start{text.find_first_not_of(seprators)};
+    size_t end{};
+    while(start!=std::string::npos)
+    {
+        end = text.find_first_of(seprators,start+1);
+        if(end==std::string::npos)
+        {
+            end=text.size();
+        }
+        words.push_back(std::string{text.substr(start,end-start)});
+        start=text.find_first_not_of(seprators,end+1);
+    }
+    return;
 }
 
-void printIt(const double& it)
+
+size_t findMaxSizeWords(const std::vector<std::string> &words)
 {
-    cout<<it<<endl;
+    size_t max{};
+    for(const auto &x:words)
+    {
+        if(x.length()>max)
+            max=x.length();
+    }
+    return max;
+}
+
+void printListWords(const std::vector<std::string> &words,const size_t &max)
+{
+    size_t count{};
+    for(const auto &x:words)
+    {
+        std::cout<<std::left<<std::setw(max+3)<<x;
+        if(++count%5==0)
+            std::cout<<std::endl;
+    }
+    std::cout<<std::endl;
+    return;
 }
