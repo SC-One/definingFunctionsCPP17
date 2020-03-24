@@ -13,3 +13,5 @@ double aroundRect(const double &width, const double &length)    // three advanta
     double result{2*width+2*length};                            // 2.when you dont modify arguments then const is better
     return result;                                              // 3.dont need copy paramters ! save memory and time
 }
+
+// one problem: if you want allow nullptr in arguments , you cant use refrence-pass!
