@@ -1,32 +1,15 @@
 #include<iostream>
-void changeNumberByRefrence(double &value);
-void changeNumberByPointer(double *value);
+double aroundRect(const double &width, const double &length);
 int main()
 {
-    double value{100};
-    std::cout<<"Before passing to function by refrence: "<<value<<std::endl;
-    changeNumberByRefrence(value);
-    std::cout<<"After passing to function by refrence: "<<value<<std::endl;
-
-
-    value=100;
-    std::cout<<"Before passing to function by pointer: "<<value<<std::endl;
-    changeNumberByPointer(&value);
-    std::cout<<"After passing to function by pointer: "<<value<<std::endl;
-
-
-    // no diffrence between them. just pointer notation
-    // in "By pointer" is superflous.
+    double a,b;
+    std::cout<<"Insert width and length: ";
+    std::cin>>a>>b;
+    std::cout<<"Result: "<<aroundRect(a,b)<<std::endl;
     return 0;
 }
-void changeNumberByRefrence(double &value)
-{
-    value+=20;
-    return;
-}
-
-void changeNumberByPointer(double *value)
-{
-    (*value)+=20;
-    return;
+double aroundRect(const double &width, const double &length)    // three advantage in this func:
+{                                                               // 1.you can use const in parameters (too) when using that function!
+    double result{2*width+2*length};                            // 2.when you dont modify arguments then const is better
+    return result;                                              // 3.dont need copy paramters ! save memory and time
 }
