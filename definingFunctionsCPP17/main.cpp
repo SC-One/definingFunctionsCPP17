@@ -1,17 +1,61 @@
 #include<iostream>
-double aroundRect(const double &width, const double &length);
+#include<vector>
+#include<string>
+#include<iomanip>
+void findWordsInText(const std::string& text, const std::string& delims,std::vector<std::string> &words);
+size_t findMaxSizeWords(const std::vector<std::string> &words);
+void printListWords(const std::vector<std::string> &words,const size_t &max);
 int main()
 {
-    double a,b;
-    std::cout<<"Insert width and length: ";
-    std::cin>>a>>b;
-    std::cout<<"Result: "<<aroundRect(a,b)<<std::endl;
+    std::string text;
+    std::cout<<"Insert text that terminated by '*': ";
+    std::getline(std::cin,text,'*');
+    std::cout<<std::endl;
+    std::vector<std::string> words;
+    const std::string separators{" ,;:.\"!?'\n"};
+    findWordsInText(text,separators,words);
+    printListWords(words,findMaxSizeWords(words));
     return 0;
 }
-double aroundRect(const double &width, const double &length)    // three advantage in this func:
-{                                                               // 1.you can use const in parameters (too) when using that function!
-    double result{2*width+2*length};                            // 2.when you dont modify arguments then const is better
-    return result;                                              // 3.dont need copy paramters ! save memory and time
+void findWordsInText(const std::string& text, const std::string& delims,std::vector<std::string> &words)
+{
+    size_t start{text.find_first_not_of(delims)};
+    size_t end{};
+    while(start!=std::string::npos)
+    {
+        end = text.find_first_of(delims,start+1);
+        if(end==std::string::npos)
+        {
+            end=text.size();
+        }
+        words.push_back(text.substr(start,end-start));
+        start=text.find_first_not_of(delims,end+1);
+    }
+    return;
 }
 
-// one problem: if you want allow nullptr in arguments , you cant use refrence-pass!
+
+size_t findMaxSizeWords(const std::vector<std::string> &words)
+{
+    size_t max{};
+    for(const auto &x:words)
+    {
+        if(x.length()>max)
+            max=x.length();
+    }
+    return max;
+}
+
+void printListWords(const std::vector<std::string> &words,const size_t &max)
+{
+    size_t count{};
+    for(const auto &x:words)
+    {
+        std::cout<<std::left<<std::setw(max+3)<<x;
+        if(++count%5==0)
+            std::cout<<std::endl;
+    }
+    std::cout<<std::endl;
+    return;
+}
+
