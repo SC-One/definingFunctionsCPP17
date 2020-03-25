@@ -1,19 +1,29 @@
 #include<iostream>
-int *larger(int *a ,int *b);
+const double *findSmallest(const double array[] ,size_t count);
+double *shiftArr(double array[],size_t count,double delta);
 int main()
 {
-    int i{100},j{99};
-    std::cout<<&i<<std::endl<<&j<<std::endl;
-    std::cout<<(larger(&i,&j))<<std::endl;
-    std::cout<<*(larger(&i,&j))<<std::endl;
+    double samples[]{-1,-2,0,1,2,10};
+    const size_t counter{sizeof (samples)/ sizeof (samples[0])};
+    shiftArr(samples,counter, -(*(findSmallest(samples,counter))));
+    for(auto &x:samples)
+        std::cout<<x<<std::endl;
     return 0;
 }
 
-int *larger(int *a ,int *b)
+const double *findSmallest(const double array[] ,size_t count)
 {
-    if(*a>*b)
-        return a;
-    else
-        return b;
+    if (!count) return nullptr;
+    size_t minIndex{};
+    for(size_t i{1};i<count;i++)
+        if(array[i]<array[minIndex])
+            minIndex=i;
+    return &array[minIndex];
+}
 
+double *shiftArr(double array[],size_t count,double delta)
+{
+    for(size_t i{};i<count;i++)
+        array[i]+=delta;
+    return array;
 }
