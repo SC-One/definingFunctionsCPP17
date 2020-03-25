@@ -1,12 +1,14 @@
 #include<iostream>
-const double &largerBoth(const double& s1,const double &s2);
-int main()
+auto getFirstLetter(std::string_view text)  // deduced return cant define as prototype ! IDK why Sorry!
 {
-    std::cout<<largerBoth(10,20)<<std::endl;
-    return 0;
+    if (text.empty())
+        return std::string_view("Empty");       //should be one type return!
+    else
+        return text.substr(0, 1);               //should be one type return!
 }
 
-const double &largerBoth(const double& s1,const double &s2)
+int main()
 {
-    return (s1>s2?s1:s2);
+    std::cout<<getFirstLetter("")<<std::endl;
+    return 0;
 }
