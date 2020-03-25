@@ -1,12 +1,19 @@
 #include<iostream>
-int main(int argc,char *argv[])
+int *larger(int *a ,int *b);
+int main()
 {
-    for (int i=0;i<argc;i++)
-    {
-        std::cout<<argv[i]<<std::endl;
-    }
-    // you can run in linux:
-    // ./nameOfProgram.o argc1 argc2 argc3 ...
-    std::cout<<std::endl;
+    int i{100},j{99};
+    std::cout<<&i<<std::endl<<&j<<std::endl;
+    std::cout<<(larger(&i,&j))<<std::endl;
+    std::cout<<*(larger(&i,&j))<<std::endl;
     return 0;
+}
+
+int *larger(int *a ,int *b)
+{
+    if(*a>*b)
+        return a;
+    else
+        return b;
+
 }
