@@ -2,9 +2,9 @@
 auto getFirstLetter(std::string_view text)  // deduced return cant define as prototype ! IDK why Sorry!
 {
     if (text.empty())
-        return std::string_view("Empty");       //should be one type return!
+        return "Empty";       //should be one type return!
     else
-        return text.substr(0, 1);               //should be one type return!
+        return text.substr(0, 1).data();               //should be one type return!
 }
 
 int main()
